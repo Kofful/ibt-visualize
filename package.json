@@ -1,0 +1,14 @@
+{
+  "name": "ibt-visualize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Vladyslav Cherniuk",
+  "license": "ISC",
+  "dependencies": {
+    "ibt-telemetry": "^1.1.1",
+    "regenerator-runtime": "^0.14.1"
+  },
+  "type": "module"
+}
