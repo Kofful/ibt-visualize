@@ -2,10 +2,14 @@ import 'regenerator-runtime/runtime.js'
 import { Telemetry } from 'ibt-telemetry'
 import fs from 'node:fs'
 
-const pathToIbt = 'ibt-examples/amg.ibt'
+const pathToIbt = 'ibt-examples/practice.ibt'
 const telemetry = await Telemetry.fromFile(pathToIbt)
 
-const content = JSON.stringify(telemetry)
+fs.writeFile('./output/practice.json', JSON.stringify(telemetry), err => {
+  if (err) {
+    console.error(err);
+  }
+})
 
 const generator = telemetry.samples();
 
@@ -23,10 +27,10 @@ while (!result.done) {
   result = generator.next()
 }
 
-const selectedIndexes = [0, 9, 1500, samples.length - 1]
+const selectedIndexes = [0, 9, Math.round((samples.length) / 2), samples.length - 1]
 const selectedSamples = selectedIndexes.map(index => samples[index])
 
-fs.writeFile('./output/amg_samples.json', JSON.stringify(selectedSamples), err => {
+fs.writeFile('./output/practice_samples.json', JSON.stringify(selectedSamples), err => {
   if (err) {
     console.error(err);
   }
