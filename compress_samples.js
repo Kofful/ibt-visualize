@@ -31,8 +31,8 @@ while (!result.done) {
   //  - previous tick to the current lap
   //  - fist tick of the current lap to the previous one
   if (!samples[Lap.value] && Lap.value > 0) {
-    samples[Lap.value - 1].push(compressedSample)
     samples[Lap.value] = [samples[Lap.value - 1].at(-1)]
+    samples[Lap.value - 1].push(compressedSample)
   }
 
   if (Lap.value !== currentLap) {
