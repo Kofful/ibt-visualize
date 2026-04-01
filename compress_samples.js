@@ -2,7 +2,7 @@ import 'regenerator-runtime/runtime.js'
 import { Telemetry } from 'ibt-telemetry'
 import fs from 'node:fs'
 
-const pathToIbt = 'ibt-examples/practice.ibt'
+const pathToIbt = 'ibt-examples/race.ibt'
 const telemetry = await Telemetry.fromFile(pathToIbt)
 
 const generator = telemetry.samples();
@@ -36,7 +36,7 @@ while (!result.done) {
   }
 
   if (Lap.value !== currentLap) {
-    if (numberOfTicksInCurrentLap < minNumberOfTicks) {
+    if (numberOfTicksInCurrentLap < minNumberOfTicks && currentLap !== 0) {
       fastestLap = currentLap
       minNumberOfTicks = numberOfTicksInCurrentLap
     }
@@ -54,7 +54,7 @@ while (!result.done) {
 
 const fastestLapSamples = samples[fastestLap]
 
-fs.writeFile('./output/practice_fastest.json', JSON.stringify(fastestLapSamples), err => {
+fs.writeFile('./output/race_fastest.json', JSON.stringify(fastestLapSamples), err => {
   if (err) {
     console.error(err);
   }
