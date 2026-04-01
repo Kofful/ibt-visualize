@@ -5,9 +5,16 @@ const data = JSON.parse(fs.readFileSync('./track-examples/red_bull_ring.json', '
 const result = {
   outer: [],
   inner: [],
+  finish: [],
+  sectorMarks: [],
 }
 
 for (const key in data) {
+  if (typeof(data[key]) !== 'string') {
+    result[key] = data[key]
+    continue
+  }
+
   const points = data[key].trim().split(' ').filter(item => item);
 
   const parsedPoints = points.map(point => {
