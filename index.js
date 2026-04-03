@@ -2,6 +2,7 @@ function _telemetryVisualization(d3,style,viewBox,redBullRingMap,speedGraph,thro
 {
   const svg = d3.create("svg")
     .attr("viewBox", `0 0 1160 700`)
+    .attr("class", "visualization-svg")
 
   svg.append("rect")
     .attr("width", "100%")
