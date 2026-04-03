@@ -2,7 +2,7 @@ import 'regenerator-runtime/runtime.js'
 import { Telemetry } from 'ibt-telemetry'
 import fs from 'node:fs'
 
-const pathToIbt = 'ibt-examples/race.ibt'
+const pathToIbt = 'ibt-examples/practice.ibt'
 const telemetry = await Telemetry.fromFile(pathToIbt)
 
 const generator = telemetry.samples();
@@ -16,7 +16,7 @@ let minNumberOfTicks = Infinity
 
 while (!result.done) {
   const sample = result.value.toJSON()
-  const {SessionTick, LapDist, Lat, Lon, LapBestLap, Lap, Speed, ...rest} = sample
+  const {SessionTick, LapDist, Lat, Lon, LapBestLap, Lap, Speed, Throttle, Brake, SteeringWheelAngle, SteeringWheelAngleMax, ...rest} = sample
   const compressedSample = {
     SessionTick: SessionTick.value,
     LapDist: LapDist.value,
@@ -25,6 +25,10 @@ while (!result.done) {
     LapBestLap: LapBestLap.value,
     Lap: Lap.value,
     Speed: Speed.value,
+    Throttle: Throttle.value,
+    Brake: Brake.value,
+    SteeringWheelAngle: SteeringWheelAngle.value,
+    SteeringWheelAngleMax: SteeringWheelAngleMax.value,
   }
 
   // in order to calculate the lap time more accurately, add:
@@ -54,7 +58,7 @@ while (!result.done) {
 
 const fastestLapSamples = samples[fastestLap]
 
-fs.writeFile('./output/race_fastest.json', JSON.stringify(fastestLapSamples), err => {
+fs.writeFile('./output/practice_fastest.json', JSON.stringify(fastestLapSamples), err => {
   if (err) {
     console.error(err);
   }
